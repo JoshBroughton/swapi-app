@@ -29,11 +29,13 @@ def character_search():
                 'error': f'Character ID "{character_id}" does not exist'
             }
         else:
-            print(response)
             char_obj = json.loads(response.content)
-            print(char_obj)
+            homeworld_url = char_obj['homeworld']
+            response = requests.get(homeworld_url, timeout=5.0)
+            homeworld_obj = json.loads(response.content)
             context = {
-                'char_obj': char_obj
+                'char_obj': char_obj,
+                'homeworld_obj': homeworld_obj,
             }
 
         return render_template('character.html', **context)
