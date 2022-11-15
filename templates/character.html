@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Star Wars Character Information
+{% endblock %}
+
+{% block content %}
+  <h1>Star Wars Character Information Search</h1>
+  <form action="/character" method="GET">
+    <label for="id_input">Enter a number for the character ID</label>
+    <input type="number" name="id_input" value="1" mix="1" max="100">
+
+    <input type="submit" value="Get Info!">
+  </form>
+
+  <section>
+    {% if char_obj %}
+      <h2>Name:</h2>
+      <p>{{char_obj.name}}</p>
+      <h2>Height:</h2>
+      <p>{{char_obj.height}} cm</p>
+      <h2>Mass:</h2>
+      <p>{{char_obj.mass}} kg</p>
+      <h2>Hair Color:</h2>
+      <p>{{char_obj.hair_color}}</p>
+      <h2>Eye Color:</h2>
+      <p>{{char_obj.eye_color}}</p>
+    {% endif %}
+
+    {% if error %}
+      <h2>{{error}}</h2>
+    {% endif %}
+  </section>
+{% endblock %}
