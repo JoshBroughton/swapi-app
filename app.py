@@ -30,12 +30,23 @@ def character_search():
             }
         else:
             char_obj = json.loads(response.content)
+
             homeworld_url = char_obj['homeworld']
             response = requests.get(homeworld_url, timeout=5.0)
             homeworld_obj = json.loads(response.content)
+
+            film_list = char_obj['films']
+            film_names = []
+
+            for film_url in film_list:
+                response = requests.get(film_url, timeout=5.0)
+                content = json.loads(response.content)
+                film_names.append(content['title'])
+
             context = {
                 'char_obj': char_obj,
                 'homeworld_obj': homeworld_obj,
+                'film_names': film_names,
             }
 
         return render_template('character.html', **context)

@@ -8,7 +8,7 @@ Star Wars Character Information
   <h1>Star Wars Character Information Search</h1>
   <form action="/character" method="GET">
     <label for="id_input">Enter a number for the character ID</label>
-    <input type="number" name="id_input" value="1" mix="1" max="100">
+    <input type="number" name="id_input" mix="1" max="100">
 
     <input type="submit" value="Get Info!">
   </form>
@@ -27,6 +27,12 @@ Star Wars Character Information
       <p>{{char_obj.eye_color}}</p>
       <h2>Homeworld</h2>
       <p>{{homeworld_obj.name}}</p>
+      <h2>Appears In:</h2>
+      <ul>
+        {% for film in film_names %}
+          <li>{{film}}</li>
+        {% endfor %}
+      </ul>
     {% endif %}
 
     {% if error %}
